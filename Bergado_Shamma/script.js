@@ -1,78 +1,66 @@
-let nameInput, commentTextarea, commentButton;
-
 document.addEventListener("DOMContentLoaded", function () {
-  nameInput = document.getElementById("name");
-  commentTextarea = document.getElementById("textarea_for_comment");
-  commentButton = document.getElementById("comment");
+  const commentForm = document.getElementById("comment-form");
+  const commentsList = document.querySelector(".comments-list");
 
-  function checkFormValidity() {
-    let nameValue = nameInput.value.trim();
-    let commentValue = commentTextarea.value.trim();
-    commentButton.disabled = !(nameValue && commentValue);
+  function createCommentElement(name, comment) {
+    const commentItem = document.createElement("div");
+    commentItem.classList.add("comment-item");
+
+    const nameParagraph = document.createElement("p");
+    nameParagraph.textContent = "Name: " + name;
+
+    const commentParagraph = document.createElement("p");
+    commentParagraph.textContent = "Comment: " + comment;
+
+    commentItem.appendChild(nameParagraph);
+    commentItem.appendChild(commentParagraph);
+
+    return commentItem;
   }
 
-  checkFormValidity();
-
-  nameInput.addEventListener("input", checkFormValidity);
-  commentTextarea.addEventListener("input", checkFormValidity);
-  commentButton.addEventListener("click", addComment);
-
-  loadComments();
-});
-
-let comments = [];
-
-function addComment() {
-  const nameInputValue = nameInput.value.trim();
-  const commentInputValue = commentTextarea.value.trim();
-  if (nameInputValue && commentInputValue) {
-    const comment = {
-      name: nameInputValue,
-      text: commentInputValue,
-      date: new Date().toISOString(),
-    };
-    comments.push(comment);
-    saveComments();
-    displayComments();
-    nameInput.value = "";
-    commentTextarea.value = "";
-    checkFormValidity();
+  function saveCommentToLocalStorage(name, comment) {
+    let comments = JSON.parse(localStorage.getItem("comments")) || [];
+    comments.push({ name: name, comment: comment });
+    localStorage.setItem("comments", JSON.stringify(comments));
   }
-}
 
-function displayComments() {
-  const commentsSection = document.querySelector(".comments-of-team");
-  commentsSection.innerHTML = "<h3>Comments</h3>";
-  comments.forEach((comment) => {
-    const commentDiv = document.createElement("div");
-    commentDiv.classList.add("comment");
-    const commentDate = new Date(comment.date).toLocaleString();
-    commentDiv.innerHTML = `
-              <p>Name: ${comment.name}</p>
-              <p>Comment: ${comment.text}</p>
-              <p class="comment-date">Date: ${commentDate}</p>
-          `;
-    commentsSection.appendChild(commentDiv);
+  function loadCommentsFromLocalStorage() {
+    let comments = JSON.parse(localStorage.getItem("comments")) || [];
+    comments.forEach(function (comment) {
+      const newComment = createCommentElement(comment.name, comment.comment);
+      commentsList.appendChild(newComment);
+    });
+  }
+
+  loadCommentsFromLocalStorage();
+
+  commentForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const comment = document.getElementById("comment").value.trim();
+
+    if (!name || !comment) {
+      alert("Please enter both name and comment.");
+      return;
+    }
+
+    const newComment = createCommentElement(name, comment);
+    commentsList.appendChild(newComment);
+
+    saveCommentToLocalStorage(name, comment);
+
+    document.getElementById("name").value = "";
+    document.getElementById("comment").value = "";
+
+    newComment.scrollIntoView({ behavior: "smooth", block: "start" });
   });
-}
 
-function sortComments(order) {
-  if (order === "asc") {
-    comments.sort((a, b) => new Date(a.date) - new Date(b.date));
-  } else if (order === "desc") {
-    comments.sort((a, b) => new Date(b.date) - new Date(a.date));
-  }
-  displayComments();
-}
+  commentForm.addEventListener("input", function () {
+    const name = document.getElementById("name").value.trim();
+    const comment = document.getElementById("comment").value.trim();
 
-function saveComments() {
-  localStorage.setItem("comments", JSON.stringify(comments));
-}
-
-function loadComments() {
-  const storedComments = localStorage.getItem("comments");
-  if (storedComments) {
-    comments = JSON.parse(storedComments);
-    displayComments();
-  }
-}
+    const submitBtn = document.getElementById("submit-btn");
+    submitBtn.disabled = !(name && comment);
+  });
+});

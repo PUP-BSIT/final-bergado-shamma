@@ -1,0 +1,205 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #050c9c;
+  color: black;
+  line-height: 1.6;
+}
+
+.my-goals,
+.comments,
+.testimonials,
+.my-answers,
+.contact-me,
+.personal-info,
+.comments-section {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 5%;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+h2 {
+  color: #0056b3;
+  margin-bottom: 10px;
+}
+
+.my-answers p {
+  margin-bottom: 15px;
+}
+
+.name {
+  display: block;
+  margin: 20px;
+  max-width: 100%;
+  height: 200px;
+  text-align: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
+}
+
+.testimonials-list,
+.comment-list,
+.reflections,
+.my-goals li,
+.personal-info p,
+.comments-list,
+form {
+  background-color: #e0f0ff;
+  border: 1px solid #3abef9;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.my-goals ol {
+  padding-left: 20px;
+}
+
+.my-goals li {
+  margin-bottom: 10px;
+}
+
+.contact-me {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.contact-me h2 {
+  color: #0056b3;
+  margin-bottom: 10px;
+}
+
+form {
+  margin-top: 10px;
+}
+
+input[type="email"],
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button[type="submit"]:hover {
+  background-color: #004080;
+}
+
+.comment-item,
+.personal-info p,
+.comment-list p,
+.testimonials-list pre,
+.reflections p {
+  border: 3px solid #3572ef;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.comment-item p {
+  margin: 0;
+}
+
+@media only screen and (max-width: 480px) {
+  .name {
+    font-size: 1.2rem;
+  }
+  .personal-info p,
+  .my-goals ol,
+  .testimonials-list pre,
+  .reflections p,
+  .comment-list p {
+    font-size: 0.8rem;
+  }
+  .comments-section button {
+    font-size: 0.9rem;
+  }
+  .testimonials-list pre {
+    white-space: normal;
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .name {
+    font-size: 1.3rem;
+  }
+  .personal-info p,
+  .my-goals ol,
+  .testimonials-list pre,
+  .reflections p,
+  .comment-list p {
+    font-size: 0.85rem;
+  }
+  .comments-section button {
+    font-size: 1rem;
+  }
+  .testimonials-list pre {
+    white-space: normal;
+    font-size: 0.85rem;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .name {
+    font-size: 1.4rem;
+  }
+  .personal-info p,
+  .my-goals ol,
+  .testimonials-list pre,
+  .reflections p,
+  .comment-list p {
+    font-size: 0.9rem;
+  }
+  .comments-section button {
+    font-size: 1.1rem;
+  }
+  .testimonials-list pre {
+    white-space: normal;
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .name {
+    font-size: 1.5rem;
+  }
+  .personal-info p,
+  .my-goals ol,
+  .testimonials-list pre,
+  .reflections p,
+  .comment-list p {
+    font-size: 1rem;
+  }
+  .comments-section button {
+    font-size: 1.2rem;
+  }
+  .testimonials-list pre {
+    white-space: normal;
+    font-size: 1rem;
+  }
+}
